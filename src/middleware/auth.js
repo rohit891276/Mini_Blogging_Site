@@ -10,13 +10,17 @@ const authenticate = function (req, res, next) {
     if (!token)
       return res.status(400).send({ status: false, msg: 'token must be present' });
 
-    let decodedToken = jwt.verify(token, 'group-21');
-    if (!decodedToken)
-      return res.status(401).send({ status: false, msg: 'token is not valid' });
-
+    jwt.verify(token, 'group-21', (err, decoded) => {
+      if (err) {
+        return res.status(401).send({ statsu: false, msg: err.message })
+      } else {
+        req.token = decoded;
+      }
+    });
+  
     next();
   } catch (err) {
-    res.status(500).send({ Status: false, msg: err.message });
+    return res.status(500).send({ Status: false, msg: err.message });
   }
 };
 
@@ -35,11 +39,11 @@ const authorise = async function (req, res, next) {
     let findBlog = await BlogModel.findOne({ authorId: authorId, _id: blogId });
 
     if (!findBlog)
-      return res.status(403).send({status: false, msg: 'Unauthorized User'});
+      return res.status(403).send({ status: false, msg: 'Unauthorized User' });
 
     next();
   } catch (err) {
-    res.status(500).send({ Status: false, msg: err.message });
+    return res.status(500).send({ Status: false, msg: err.message });
   }
 };
 
