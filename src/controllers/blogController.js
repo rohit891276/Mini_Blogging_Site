@@ -163,9 +163,7 @@ const deletedByQuery = async function (req, res) {
     if (check == 0)
       return res.status(404).send({ status: false, msg: "data not found" });
 
-    const deletedData = await BlogModel.updateMany(queryData, {
-      $set: { isDeleted: true, deletedAt: Date() },
-    });
+    const deletedData = await BlogModel.updateMany(queryData, { $set: { isDeleted: true, deletedAt: Date() } });
 
     res.status(200).send({ status: true, data: "successfully deleted" });
 
