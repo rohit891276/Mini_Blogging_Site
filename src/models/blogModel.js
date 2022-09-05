@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const blogSchema = new mongoose.Schema(
@@ -15,7 +15,7 @@ const blogSchema = new mongoose.Schema(
 
     authorId: {
       type: ObjectId,
-      ref: 'Author',
+      ref: "Author",
       required: true,
     },
 
@@ -53,4 +53,4 @@ const blogSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model('Blog', blogSchema);
+module.exports = mongoose.model("Blog", blogSchema);

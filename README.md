@@ -8,13 +8,13 @@ Repository for backend cohort - Radon
 
 ### Models
 - Author Model
-```
+
 { fname: { mandatory}, lname: {mandatory}, title: {mandatory, enum[Mr, Mrs, Miss]}, email: {mandatory, valid email, unique}, password: {mandatory} }
-```
+
 - Blogs Model
-```
+
 { title: {mandatory}, body: {mandatory}, authorId: {mandatory, refs to author model}, tags: {array of string}, category: {string, mandatory, examples: [technology, entertainment, life style, food, fashion]}, subcategory: {array of string, examples[technology-[web development, mobile development, AI, ML etc]] }, createdAt, updatedAt, deletedAt: {when the document is deleted}, isDeleted: {boolean, default: false}, publishedAt: {when the blog is published}, isPublished: {boolean, default: false}}
-```
+
 
 ### Author APIs /authors
 - Create an author - atleast 5 authors
@@ -63,13 +63,13 @@ example of a query url: blogs?filtername=filtervalue&f2=fv2
 - Allow an author to login with their email and password. On a successful login attempt return a JWT token contatining the authorId
 - If the credentials are incorrect return a suitable error message with a valid HTTP status code
 
-### Authentication
+### Authentication 
 - Add an authorisation implementation for the JWT token that validates the token before every protected endpoint is called. If the validation fails, return a suitable error message with a corresponding HTTP status code
 - Protected routes are create a blog, edit a blog, get the list of blogs, delete a blog(s)
 - Set the token, once validated, in the request - `x-api-key`
-- Use a middleware for authentication purpose.
+- Use a middleware for authentication purpose. 
 
-### Authorisation
+### Authorisation 
 - Make sure that only the owner of the blogs is able to edit or delete the blog.
 - In case of unauthorized access return an appropirate error message.
 
@@ -88,21 +88,21 @@ Refer below sample
 
 
 ### Successful Response structure
-```yaml
+yaml
 {
   status: true,
   data: {
 
   }
 }
-```
+
 ### Error Response structure
-```yaml
+yaml
 {
   status: false,
   msg: ""
 }
-```
+
 
 
 
@@ -110,7 +110,7 @@ Refer below sample
 
 ## Collections
 ### Blogs
-```yaml
+yaml
 {
   "title": "How to win friends",
   "body": "Blog body",
@@ -124,7 +124,7 @@ Refer below sample
   "createdAt": "2021-09-17T04:25:07.803Z",
   "updatedAt": "2021-09-17T04:25:07.803Z",
 }
-```
+
 
 #### Refer https://jsonplaceholder.typicode.com/guide/ for some fake blogs data.
 

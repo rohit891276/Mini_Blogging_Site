@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const authorSchema = new mongoose.Schema(
   {
@@ -15,20 +15,25 @@ const authorSchema = new mongoose.Schema(
     title: {
       type: String,
       required: true,
-      enum: ['Mr', 'Mrs', 'Miss'],
+      enum: ["Mr", "Mrs", "Miss"],
     },
 
     email: {
       type: String,
       required: true,
       unique: true,
-      // match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,'Fill a valid email address'],
+      match: [
+        /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+        "Fill a valid email address",
+      ],
     },
 
     password: {
       type: String,
       required: true,
     },
-  },{timestamps: true });
+  },
+  { timestamps: true }
+);
 
-module.exports = mongoose.model('Author', authorSchema);
+module.exports = mongoose.model("Author", authorSchema);
