@@ -47,8 +47,8 @@ const createAuthor = async function (req, res) {
     if (!passRegex.test(authorData.password))
       return res.status(400).send({ msg: "Please enter a password which contains min 8 letters, at least a symbol, upper and lower case letters and a number" });
 
-    const savedData = await AuthorModel.create(authorData);
-    res.status(201).send({ status: true, msg: savedData });
+    const savedData = await atus: tAuthorModel.create(authorData);
+    res.status(201).send({ strue, msg: savedData });
 
   } catch (err) {
     res.status(500).send({ status: false, msg: err.message });

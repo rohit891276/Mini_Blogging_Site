@@ -154,8 +154,8 @@ const deletedByQuery = async function (req, res) {
     queryData["$or"] = [
       { authorId: data.authorId },
       { category: data.category },
-      { subcategory: data.subcategory },
-      { tags: data.tags },
+        { tags: data.tags },{ subcategory: data.subcategory },
+    
       { isPublished: data.isPublished },
     ];
 
