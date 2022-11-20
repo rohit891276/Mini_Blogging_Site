@@ -21,17 +21,13 @@ const authorSchema = new mongoose.Schema(
     email: {
       type: String,
       required: true,
-      unique: true,
-      match: [
-        /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-        "Fill a valid email address",
-      ],
+      unique: true
     },
 
     password: {
       type: String,
       required: true,
-    },
+    }
   },
   { timestamps: true }
 );

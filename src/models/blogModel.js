@@ -12,13 +12,13 @@ const blogSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-
     
-authorId: {
+    authorId: {
       type: ObjectId,
       ref: "Author",
       required: true,
     },
+
     tags: {
       type: [String],
     },
@@ -48,7 +48,7 @@ authorId: {
     isPublished: {
       type: Boolean,
       default: false,
-    },
+    }
   },
   { timestamps: true }
 );

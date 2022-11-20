@@ -1,6 +1,5 @@
 const AuthorModel = require("../models/authorModel");
 const BlogModel = require("../models/blogModel");
-const jwt = require("jsonwebtoken");
 
 //-----------------------------------------------------------------------------------------------//
 
@@ -8,14 +7,14 @@ const createBlog = async function (req, res) {
   try {
     let data = req.body;
 
+    if (!data.body)
+      return res.status(400).send({ status: false, msg: "body required" });
+
     if (!data.authorId)
       return res.status(400).send({ status: false, msg: "author id required" });
 
     if (!data.title)
       return res.status(400).send({ status: false, msg: "title required" });
-
-    if (!data.body)
-      return res.status(400).send({ status: false, msg: "body required" });
 
     if (!data.category)
       return res.status(400).send({ status: false, msg: "category required" });
@@ -24,10 +23,7 @@ const createBlog = async function (req, res) {
     if (!check)
       return res.status(400).send({ status: false, msg: "enter valid author id" });
 
-    let token = req.headers["x-api-key"];
-
-    let decodedToken = jwt.verify(token, "group-21");
-    if (decodedToken.authorId != data.authorId)
+    if (req.decodedToken.authorId != data.authorId)
       return res.status(403).send({ status: false, msg: "Unauthorized" });
 
     const createdBlog = await BlogModel.create(data);
@@ -45,7 +41,7 @@ const getAllBlogs = async function (req, res) {
     let data = req.query;
     let filter = { isDeleted: false, isPublished: true };
 
-    if (Object.keys(data).length == 0) {
+    if (Object.keys(data).length === 0) {
       let allBlogs = await BlogModel.find(filter);
       res.status(200).send({ status: true, msg: allBlogs });
     } else {
@@ -154,8 +150,8 @@ const deletedByQuery = async function (req, res) {
     queryData["$or"] = [
       { authorId: data.authorId },
       { category: data.category },
-        { tags: data.tags },{ subcategory: data.subcategory },
-    
+      { tags: data.tags },
+      { subcategory: data.subcategory },
       { isPublished: data.isPublished },
     ];
 

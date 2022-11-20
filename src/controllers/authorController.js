@@ -9,7 +9,7 @@ const createAuthor = async function (req, res) {
 
     const email = await AuthorModel.findOne({ email: authorData.email });
 
-    if (Object.keys(authorData).length == 0)
+    if (Object.keys(authorData).length === 0)
       return res.status(400).send({ status: false, msg: "enter body" });
 
     let nameRegex = /^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$/;
@@ -47,8 +47,8 @@ const createAuthor = async function (req, res) {
     if (!passRegex.test(authorData.password))
       return res.status(400).send({ msg: "Please enter a password which contains min 8 letters, at least a symbol, upper and lower case letters and a number" });
 
-    const savedData = await atus: tAuthorModel.create(authorData);
-    res.status(201).send({ strue, msg: savedData });
+    const savedData = await AuthorModel.create(authorData)
+    res.status(201).send({ status: true, msg: savedData });
 
   } catch (err) {
     res.status(500).send({ status: false, msg: err.message });
@@ -78,7 +78,10 @@ const loginAuthor = async function (req, res) {
       "group-21"
     );
     res.setHeader("x-api-key", token);
-    res.status(200).send({ status: true, token: token });
+    const finalData = {};
+    finalData.userId = findAuthor._id;
+    finalData.token = token
+    res.status(200).send({ status: true, token: finalData });
 
   } catch (err) {
     res.status(500).send({ status: false, msg: err.message });
